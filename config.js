@@ -13,7 +13,9 @@ export default {
   supabaseAnonKey: 'sb_publishable_0O3FLi1EQD2j1Gj80frdvw_Dpf6qVbv',
 
   // --- Identity -------------------------------------------------------
-  name: 'Riverside Swap',
+  // ✏️ STARTING ONE FOR YOUR TOWN? Change "Wincanton" to your town's name
+  // here and in index.html (the link-preview tags), then set your areas below.
+  name: 'Wincanton Open Barter',
   tagline: 'Swap things and skills with your neighbours. No money needed.',
   heroTitle: 'Trade what you have for what you need',
   moderatorEmail: '', // shown on the rules page so people can reach a human
@@ -30,9 +32,10 @@ export default {
   creditHint: 'Roughly, 1 credit ≈ 10 minutes of someone\'s time.',
 
   // --- Places ---------------------------------------------------------
-  // Areas people can pick. Local-only listings are matched within the
-  // same area. Leave the list empty to let people type their own.
-  areas: ['Riverside', 'Old Town', 'Hillside'],
+  // Neighbourhoods or nearby villages people can pick, e.g. ['Town centre', 'Bayford'].
+  // Local-only listings are matched within the same area.
+  // Leave the list empty to let people type their own.
+  areas: [],
 
   // --- Categories -----------------------------------------------------
   categories: [

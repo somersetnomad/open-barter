@@ -1,5 +1,7 @@
 # Open Barter
 
+**Wincanton Open Barter** is the first community running on Open Barter. Starting one for your own town? Copy this repository and change "Wincanton" to your town's name: see [Make it your town's](#make-it-your-towns) below.
+
 **Live site:** https://somersetnomad.github.io/open-barter/
 
 > **Forking?** `config.js` in this repository points at the live database. Blank out `supabaseUrl` and `supabaseAnonKey` in your copy to start in demo mode, then connect your own Supabase project.
@@ -29,6 +31,18 @@ It runs in **demo mode** straight after you fork it, with sample members and dat
 | **Tax** | Barter can count as income for businesses. | The rules page carries a short, general note. It isn't legal advice. |
 
 ---
+
+## Make it your town's
+
+This copy is set up for **Wincanton**. To run one for your own town:
+
+1. **Fork** this repository (or download it and upload it to a new one).
+2. In `config.js`:
+   - change `name: 'Wincanton Open Barter'` to your town, for example `'Frome Open Barter'`
+   - blank out `supabaseUrl` and `supabaseAnonKey`, so your copy starts in demo mode instead of using Wincanton's database
+   - list your own neighbourhoods or nearby villages in `areas` (or leave it empty to let people type their own)
+3. In `index.html`, change "Wincanton" and the web address in the link-preview (`og:`) tags.
+4. Follow **Go live** below to connect your own free database. Then make your own link-preview picture on the site's **For organisers** page and save it as `assets/social-card.png`.
 
 ## Try the demo
 
@@ -103,7 +117,7 @@ When someone pastes your address into Facebook, WhatsApp or X, those apps read t
 
 ## Use your own web address
 
-Your site works for free at `your-name.github.io/repo-name`. A domain of your own (for example `riversideswap.org`) is easier to say and to print. The organisers' guide has the full walkthrough; in short:
+Your site works for free at `your-name.github.io/repo-name`. A domain of your own (for example `yourtownbarter.org`) is easier to say and to print. The organisers' guide has the full walkthrough; in short:
 
 1. Buy a domain from any registrar, and turn on auto-renew. Or, for free, ask a local group that already has a website to give you a sub-address such as `swap.their-domain.org`.
 2. Verify the domain on GitHub: **your profile picture → Settings → Pages → Add a domain**. This stops anyone else claiming it.

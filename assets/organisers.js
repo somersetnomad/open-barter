@@ -73,6 +73,10 @@ Contact: [your name], [phone], [email]`]
     main.innerHTML = `<div class="guide">
     <h1>For organisers</h1>
     <p class="lede-sm">A swap site only works when enough neighbours use it. Here's how to get it going without spending money.</p>
+    <div class="notice warn" style="margin-bottom:24px"><b>Starting one for your own town?</b> This site is free and open source.
+      Copy it${cfg.sourceUrl ? ` from <a href="${esc(cfg.sourceUrl)}">GitHub</a>` : ''}, then change <b>${esc(cfg.name)}</b> to your town's name
+      (for example, "Frome Open Barter") in <code>config.js</code> and in the link-preview tags in <code>index.html</code>.
+      The README walks you through the rest.</div>
     <nav class="toc" aria-label="On this page">${sections.map(([id, t]) => `<button class="linkbtn" data-jump="${id}">${t}</button>`).join('')}</nav>
 
     <section id="g-launch"><h2>Before you launch</h2>
@@ -158,7 +162,7 @@ Contact: [your name], [phone], [email]`]
     </section>
 
     <section id="g-domain"><h2>Your own web address</h2>
-      <p>Your site already works at <b>${esc(share.shortUrl())}</b> for free. A short address of your own, like <b>riversideswap.org</b>, is easier to say out loud and to put on posters.</p>
+      <p>Your site already works at <b>${esc(share.shortUrl())}</b> for free. A short address of your own, like <b>yourtownbarter.org</b>, is easier to say out loud and to put on posters.</p>
       <h3>Free option: borrow a sub-address</h3>
       <p>If your village hall, residents' association or another local group already has a website, ask whoever manages it to add <b>swap.their-domain.org</b> for you. They add one DNS record (step 4 below), and you do the rest.</p>
       <h3>Buying your own</h3>
@@ -181,7 +185,7 @@ Contact: [your name], [phone], [email]`]
         <li><b>Update your code:</b> set <code>siteUrl</code> in <code>config.js</code> to the new address, and change the addresses in the link-preview tags at the top of <code>index.html</code>.</li>
         <li><b>Reprint your posters</b> so the QR code uses the new address. The old github.io address will redirect to the new one.</li>
       </ol>
-      <p class="muted small">If you use your own email provider for sign-in emails, you can also send them from your domain (e.g. hello@riversideswap.org). Your email provider will ask you to add a few DNS records to prove you own it.</p>
+      <p class="muted small">If you use your own email provider for sign-in emails, you can also send them from your domain (e.g. hello@yourtownbarter.org). Your email provider will ask you to add a few DNS records to prove you own it.</p>
     </section>
   </div>`;
 
