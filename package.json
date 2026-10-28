@@ -1,0 +1,15 @@
+{
+  "name": "open-barter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A reusable community barter site: trade circles, mutual credit, GitHub Pages + Supabase.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/schema.test.mjs",
+    "start": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.12"
+  }
+}
