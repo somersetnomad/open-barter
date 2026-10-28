@@ -78,9 +78,45 @@ Moderators see a **Moderation** link in the footer. It lists reports and dispute
 
 ---
 
+## Promote your swap
+
+The site has a built-in guide at **For organisers** (link in the footer, or `#/organisers`). It covers:
+
+- **Launching:** seed 30 or more listings with founding members before going public, so newcomers never see an empty site.
+- **Free grassroots tactics:** noticeboards, newsletters, local online groups, swap meets, partner groups and local media.
+- **Ready-made posts:** a WhatsApp message, a group post, a newsletter blurb, an email to a library or café, and a press release. They fill in your name and address automatically and have a copy button.
+- **A printable A4 poster** (`#/poster`) with a QR code, current offers and tear-off strips.
+- **Pictures for social media:** a square post image and the link-preview image.
+- **Doing it the right way:** asking permission, no flyposting, respecting people's data.
+
+Every listing also has share buttons (WhatsApp, Facebook, X, email, copy link, and the phone's own share menu). Members can also download a picture of the listing as a swing tag, with a QR code that opens it. Shared links use `?l=<id>`, so they survive apps that strip the `#` part of a web address.
+
+### Link previews
+
+When someone pastes your address into Facebook, WhatsApp or X, those apps read the tags at the top of `index.html`. They can't run the site's code, so every link (including listing links) shows the same community preview. To make it yours:
+
+1. On **For organisers → Posters and pictures**, click **Download link preview**.
+2. Save it in your repository as `assets/social-card.png`, replacing the sample.
+3. In `index.html`, change the `og:` tags to your community's name, description and web address.
+
+## Use your own web address
+
+Your site works for free at `your-name.github.io/repo-name`. A domain of your own (for example `riversideswap.org`) is easier to say and to print. The organisers' guide has the full walkthrough; in short:
+
+1. Buy a domain from any registrar, and turn on auto-renew. Or, for free, ask a local group that already has a website to give you a sub-address such as `swap.their-domain.org`.
+2. Verify the domain on GitHub: **your profile picture → Settings → Pages → Add a domain**. This stops anyone else claiming it.
+3. In your repository: **Settings → Pages → Custom domain**, enter it and save.
+4. At your registrar, add DNS records. For a sub-address, add a `CNAME` pointing to `your-name.github.io`. For a main address, add four `A` records for `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`, plus a `CNAME` for `www`. Never use wildcard (`*`) records.
+5. When GitHub shows the domain is working (DNS can take up to a day), tick **Enforce HTTPS**.
+6. Update Supabase **Authentication → URL Configuration** (Site URL and Redirect URLs), set `siteUrl` in `config.js`, update the `og:` tags in `index.html`, and reprint posters.
+
+See GitHub's guide to [managing a custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) for details.
+
+---
+
 ## Customise it
 
-**Everything in `config.js`:** name, tagline, what credits are called, areas, categories, rules, the list of things not allowed, a moderator contact email, and the link to your copy of the code.
+**Everything in `config.js`:** name, tagline, web address (`siteUrl`), what credits are called, areas, categories, rules, the list of things not allowed, a moderator contact email, and the link to your copy of the code.
 
 **Credit limits and other rules** live in the database, so nobody can get round them. Change them in the SQL Editor:
 
@@ -124,6 +160,10 @@ index.html            the page shell
 config.js             your community's settings
 assets/app.js         the interface (no build step, no framework)
 assets/api.js         talks to Supabase, or to the in-browser demo database
+assets/share.js       share links, QR codes and downloadable pictures
+assets/organisers.js  the organisers' guide and printable poster
+assets/vendor/        QR code generator (MIT, Kazuhiko Arase)
+assets/social-card.png  the link-preview picture
 assets/style.css      look and feel
 supabase/schema.sql   tables, rules and all the functions the site calls
 supabase/storage.sql  optional photo uploads

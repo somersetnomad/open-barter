@@ -15,6 +15,9 @@ export default {
   tagline: 'Swap things and skills with your neighbours. No money needed.',
   heroTitle: 'Trade what you have for what you need',
   moderatorEmail: '', // shown on the rules page so people can reach a human
+  // Full public address of the site, used in QR codes and share links. Leave blank to use
+  // whatever address the site is opened from. Set it if you move to your own domain.
+  siteUrl: '',
   sourceUrl: 'https://github.com/somersetnomad/open-barter', // link to your copy of the code
 
   // --- Credits --------------------------------------------------------

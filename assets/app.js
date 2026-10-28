@@ -1,5 +1,7 @@
 import cfg from '../config.js';
 import { createBackend } from './api.js';
+import * as share from './share.js';
+import { organiserViews } from './organisers.js';
 
 // ------------------------------------------------------------------ state
 const S = { api: null, me: null, settings: null, loops: [] };
@@ -145,7 +147,7 @@ function renderChrome() {
       await S.api.reset(); toast('Demo data reset'); await refreshMe(); route();
     };
   }
-  const links = [`<a href="#/rules">Community rules</a>`];
+  const links = [`<a href="#/rules">Community rules</a>`, `<a href="#/organisers">For organisers</a>`];
   if (S.me?.is_moderator) links.push(`<a href="#/mod">Moderation</a>`);
   if (cfg.sourceUrl) links.push(`<a href="${esc(cfg.sourceUrl)}">Open source code</a>`);
   $('#footer').innerHTML = `<span>${esc(cfg.name)}</span>${links.join('')}<span>Credits have no cash value.</span>`;
@@ -302,8 +304,10 @@ views.listing = async ([id]) => {
             : `Say what you can give, and ask for ${esc(cfg.creditName)} or something of theirs.`}</p>` : `<p class="muted">This listing isn't available right now.</p>`}
         ${!mine && S.me ? `<button class="linkbtn small" id="report">Report this listing</button>` : ''}
       </div>
+      ${l.status === 'active' ? sharePanel(l, mine) : ''}
     </aside>
   </div>`;
+  bindSharePanel(l);
   main.querySelectorAll('[data-status]').forEach(b => b.onclick = () => busy(b, async () => {
     if (b.dataset.status === 'removed' && !confirm('Delete this listing? This cannot be undone.')) return;
     await rpc('set_listing_status', { p_id: l.id, p_status: b.dataset.status });
@@ -312,6 +316,44 @@ views.listing = async ([id]) => {
   }));
   const rb = $('#report'); if (rb) rb.onclick = () => report('listing', l.id);
 };
+
+// ------------------------------------------------------------- sharing
+function sharePanel(l, mine) {
+  const url = share.listingUrl(l), links = share.shareLinks(share.listingText(l), url, l.title);
+  const a = (href, label) => `<a class="btn small" href="${esc(href)}" target="_blank" rel="noopener">${label}</a>`;
+  return `<div class="panel stack share">
+    <h3 style="margin:0">${mine ? 'Spread the word' : 'Know someone who could use this?'}</h3>
+    <p class="muted small" style="margin:0">${mine ? 'Sharing your listing in local groups is the quickest way to find a match.' : 'Share it with them, or in a local group.'}</p>
+    <div class="share-grid">
+      <button class="btn small primary" id="sh-native" hidden>Share…</button>
+      ${a(links.whatsapp, 'WhatsApp')}${a(links.facebook, 'Facebook')}${a(links.x, 'X')}${a(links.email, 'Email')}
+      <button class="btn small" id="sh-copy">Copy link</button>
+    </div>
+    <button class="btn small" id="sh-image">Download a picture to post</button>
+    <p class="muted small" style="margin:0">The picture includes a QR code that opens this listing, ready for Instagram, Facebook groups or a noticeboard.</p>
+  </div>`;
+}
+function bindSharePanel(l) {
+  const native = $('#sh-native'); if (!native) return;
+  const url = share.listingUrl(l), text = share.listingText(l);
+  if (navigator.share) {
+    native.hidden = false;
+    native.onclick = () => busy(native, async () => {
+      try {
+        const blob = await share.listingImage(l).catch(() => null);
+        const file = blob && new File([blob], `${share.slug(l.title)}.png`, { type: 'image/png' });
+        if (file && navigator.canShare?.({ files: [file] })) await navigator.share({ files: [file], text: `${text} ${url}`, title: l.title });
+        else await navigator.share({ title: l.title, text, url });
+      } catch (e) { if (e.name !== 'AbortError') throw e; }
+    });
+  }
+  $('#sh-copy').onclick = async () => toast(await share.copyText(`${text} ${url}`) ? 'Link and description copied' : 'Could not copy. Select the address bar instead.');
+  const img = $('#sh-image');
+  img.onclick = () => busy(img, async () => {
+    share.download(await share.listingImage(l), `${share.slug(cfg.name)}-${share.slug(l.title)}.png`);
+    toast('Picture downloaded');
+  });
+}
 
 async function report(kind, id) {
   const reason = prompt('What is the problem? A moderator will review it.');
@@ -728,6 +770,8 @@ views.mod = async () => {
   }));
 };
 
+Object.assign(views, organiserViews({ rpc, esc, toast, busy, main }));
+
 // ----------------------------------------------------------------- router
 async function route() {
   if (/^#(access_token|error)=/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search + '#/');
@@ -749,6 +793,11 @@ async function route() {
 // ------------------------------------------------------------------- boot
 (async function boot() {
   try {
+    // Shared links look like ?l=<listing id>; turn them into the page route.
+    const shared = new URLSearchParams(location.search).get('l');
+    if (shared && /^[0-9a-f-]{36}$/i.test(shared)) {
+      history.replaceState(null, '', location.pathname + '#/listing/' + shared);
+    }
     S.api = await createBackend(cfg);
     S.settings = await rpc('get_settings');
     S.api.onAuthChange(async () => { await refreshMe(); route(); });

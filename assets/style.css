@@ -261,3 +261,56 @@ legend { font-weight: 700; padding: 0 6px; }
   .loop-svg { margin: 0 auto; }
   .toast { bottom: 84px; }
 }
+
+/* ---------- sharing ---------- */
+.share-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- organisers' guide ---------- */
+.guide { max-width: 860px; }
+.guide section { margin: 0 0 44px; scroll-margin-top: 90px; }
+.lede-sm { font-size: 1.15rem; color: var(--ink-soft); max-width: 60ch; }
+.toc { display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 14px 0; margin-bottom: 32px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.steps { padding-left: 1.4em; display: grid; gap: 10px; }
+.steps li::marker { font-family: var(--display); font-weight: 800; }
+.tactics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; }
+.tactics ul { padding-left: 1.2em; margin: 0 0 18px; }
+.tactics li { margin-bottom: 6px; }
+.msgbox { font-size: .95rem; line-height: 1.5; margin-top: 10px; }
+.print-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 12px; }
+.dns { border-collapse: collapse; margin: 10px 0; font-size: .92rem; width: 100%; }
+.dns th, .dns td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+.dns td:last-child { font-family: ui-monospace, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+code { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; font-size: .9em; }
+
+/* ---------- poster ---------- */
+.poster-controls { max-width: 794px; margin: 0 auto 20px; }
+.poster { width: 100%; max-width: 794px; aspect-ratio: 210 / 297; margin: 0 auto; background: #fff; color: #1E2B23;
+  box-shadow: var(--shadow); padding: 6% 7% 0; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.poster-top { display: flex; align-items: center; gap: 12px; font: 800 clamp(1rem, 3vw, 1.6rem)/1 var(--display); }
+.poster-head { font: 800 clamp(2.2rem, 8.5vw, 4.6rem)/.98 var(--display); margin: 4% 0 3%; letter-spacing: -.02em; color: #2448C9; }
+.poster-sub { font-size: clamp(1rem, 2.6vw, 1.45rem); margin: 0 0 4%; max-width: 30ch; }
+.poster-ex { border-left: 8px solid #E3A92B; padding: 2px 0 2px 16px; margin-bottom: 4%; font-size: clamp(.9rem, 2.2vw, 1.2rem); }
+.poster-ex ul { margin: 4px 0 0; padding-left: 1.1em; columns: 2; }
+.poster-mid { display: grid; grid-template-columns: 1fr 38%; gap: 5%; align-items: center; }
+.poster-steps { font-size: clamp(.95rem, 2.4vw, 1.3rem); padding-left: 1.3em; margin: 0; display: grid; gap: 10px; }
+.poster-steps li::marker { font: 800 1em var(--display); color: #2448C9; }
+.poster-qr { display: grid; gap: 6px; text-align: center; font-weight: 700; font-size: clamp(.85rem, 2vw, 1.1rem); }
+.poster-qr svg { width: 100%; height: auto; border: 3px solid #1E2B23; border-radius: 8px; }
+.poster-url { font: 800 clamp(1.1rem, 3.6vw, 2rem)/1.1 var(--display); margin: 4% 0 1%; overflow-wrap: anywhere; }
+.poster-small { color: #55625A; font-size: clamp(.8rem, 1.8vw, 1rem); }
+.tabs { margin: auto -8% 0; display: grid; grid-template-columns: repeat(8, 1fr); border-top: 2px dashed #55625A; }
+.tabs span { writing-mode: vertical-rl; transform: rotate(180deg); padding: 10px 4px; height: clamp(110px, 22vw, 190px); font-size: clamp(.6rem, 1.5vw, .82rem);
+  border-left: 2px dashed #55625A; text-align: left; line-height: 1.2; overflow: hidden; }
+.tabs span:last-child { border-left: 0; }
+
+@media (max-width: 860px) {
+  .tactics, .print-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  @page { size: A4; margin: 0; }
+  body { background: #fff; }
+  .topbar, .demo-bar, .footer, .poster-controls, .toast, .mainnav { display: none !important; }
+  main { padding: 0; max-width: none; }
+  .poster { box-shadow: none; max-width: none; width: 210mm; height: 297mm; aspect-ratio: auto; }
+  .poster * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
