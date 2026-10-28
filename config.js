@@ -32,10 +32,10 @@ export default {
   creditHint: 'Roughly, 1 credit ≈ 10 minutes of someone\'s time.',
 
   // --- Places ---------------------------------------------------------
-  // Neighbourhoods or nearby villages people can pick, e.g. ['Town centre', 'Bayford'].
+  // Your town and nearby villages people can pick. Change these to your own.
   // Local-only listings are matched within the same area.
   // Leave the list empty to let people type their own.
-  areas: [],
+  areas: ['Wincanton', 'Bayford', 'Stoke Trister', 'Castle Cary'],
 
   // --- Categories -----------------------------------------------------
   categories: [
