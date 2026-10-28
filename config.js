@@ -32,10 +32,50 @@ export default {
   creditHint: 'Roughly, 1 credit ≈ 10 minutes of someone\'s time.',
 
   // --- Places ---------------------------------------------------------
-  // Your town and nearby villages people can pick. Change these to your own.
+  // Your town and nearby villages people can pick (here: Wincanton and the
+  // villages of the old Wincanton Rural District). Change these to your own.
   // Local-only listings are matched within the same area.
   // Leave the list empty to let people type their own.
-  areas: ['Wincanton', 'Bayford', 'Stoke Trister', 'Castle Cary'],
+  areas: [
+    'Wincanton',
+    'Alford',
+    'Ansford',
+    'Bayford',
+    'Blackford',
+    'Bratton Seymour',
+    'Brewham',
+    'Bruton',
+    'Castle Cary',
+    'Charlton Horethorne',
+    'Charlton Musgrove',
+    'Compton Pauncefoot',
+    'Corton Denham',
+    'Cucklington',
+    'Henstridge',
+    'Holton',
+    'Horsington',
+    'Lovington',
+    'Maperton',
+    'Milborne Port',
+    'North Barrow',
+    'North Cadbury',
+    'North Cheriton',
+    'Penselwood',
+    'Pitcombe',
+    'Queen Camel',
+    'Shepton Montague',
+    'South Barrow',
+    'South Cadbury',
+    'Sparkford',
+    'Stoke Trister',
+    'Stowell',
+    'Sutton Montis',
+    'Templecombe',
+    'Weston Bampfylde',
+    'Wheathill',
+    'Yarlington',
+    'Elsewhere nearby'
+  ],
 
   // --- Categories -----------------------------------------------------
   categories: [
