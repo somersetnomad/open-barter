@@ -6,9 +6,11 @@ export default {
   // --- Database -------------------------------------------------------
   // Leave both blank to run in demo mode (sample data, stored only in
   // the visitor's browser). Fill them in from Supabase → Project
-  // Settings → API to go live. The anon key is meant to be public.
-  supabaseUrl: '',
-  supabaseAnonKey: '',
+  // Settings → API to go live. The anon/publishable key is meant to be public.
+  // FORKING THIS REPO? Blank these two out first, or your copy will
+  // use somersetnomad's live database instead of your own.
+  supabaseUrl: 'https://gyudxvdjnqdtrfeikqqi.supabase.co',
+  supabaseAnonKey: 'sb_publishable_0O3FLi1EQD2j1Gj80frdvw_Dpf6qVbv',
 
   // --- Identity -------------------------------------------------------
   name: 'Riverside Swap',

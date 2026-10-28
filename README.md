@@ -1,6 +1,8 @@
 # Open Barter
 
-**Live demo:** https://somersetnomad.github.io/open-barter/
+**Live site:** https://somersetnomad.github.io/open-barter/
+
+> **Forking?** `config.js` in this repository points at the live database. Blank out `supabaseUrl` and `supabaseAnonKey` in your copy to start in demo mode, then connect your own Supabase project.
 
 A free, open-source barter website any community can run: a neighbourhood, a village, a club, a skills-swap group. It's a static site hosted on **GitHub Pages**, with a free **Supabase** database behind it.
 

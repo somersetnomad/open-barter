@@ -238,7 +238,7 @@ $$;
 
 -- Split text into lower-case keywords for matching (drops filler words, crude plural stripping).
 create or replace function public._words(t text) returns text[]
-language sql immutable as $$
+language sql immutable set search_path = '' as $$
   select coalesce(array_agg(distinct case when char_length(w) > 3 and w like '%s' and w not like '%ss'
                                           then left(w, -1) else w end), '{}'::text[])
   from regexp_split_to_table(lower(coalesce(t, '')), '[^[:alnum:]]+') as w
